@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { io } from 'socket.io-client';
+import env from "react-dotenv";
+const API_URL = env.API_URL;
 
-const socket = io('http://localhost:5000')
+const socket = io(API_URL)
 var array = [];
-// let row = [];
 
-// do {
-//     sender = prompt('Please enter your name')
-// } while (!sender);
 // function messages() {
   // for (let x in obj) {
   //   // console.log(obj[x]);
@@ -19,19 +17,17 @@ var array = [];
 class Home extends Component {
       constructor(props) {
         super(props)
-        this.textLog = React.createRef();
         this.messagesEnd = React.createRef();
         this.state = {name:'', msg: '', res:{name:'', msg: ''}, modal :true, roomId: '' ,incomming: false, outgoing: false }
-        // const messagesEnd = React.createRef();
       }
       scrollToBottom = () => {
-        this.messagesEnd.current.scrollIntoView({ behavior: "smooth" });
+        // this.messagesEnd.current.scrollIntoView({ behavior: "smooth" });
+        this.messagesEnd.current.scrollTop = this.messagesEnd.current.scrollHeight;
       }
 
       componentDidUpdate() {
-          // this.textLog.current.scrollTop = this.textLog.current.scrollHeight;
-          this.scrollToBottom();
           // console.log('updated')
+          this.scrollToBottom();
 
       }
         joinHandler = () => {
@@ -46,11 +42,7 @@ class Home extends Component {
               name: this.state.name,
               msg: this.state.msg,
             }
-            // array = this.state.chat_history
             // chat_history = Object.assign({name: this.state.name, msg: this.state.msg})
-            // chat_history.push({id: _id, name: this.state.name, msg: this.state.msg});
-            // this.state.chat_history.push(`${this.state.msg}`);
-            // array.push(`${this.state.msg}`);
               array.push(
                 <>
                           <label className="leading-7 w-1/2 ml-auto text-sm text-gray-800"> You :</label>
@@ -60,10 +52,7 @@ class Home extends Component {
                 </> 
               );
               // console.log(array)
-              
-              
               socket.emit('send-message' , data ,this.state.roomId);
-              // this.scrollToBottom();
               this.setState({msg: '',outgoing: true})
 
         }
@@ -111,19 +100,19 @@ render() {
               </div>
             </div>
 
-            <section id="section" className="h-40 container overflow-auto flex flex-col border-2 border-blue-300 mt-4 rounded-lg w-full relative mb-2">
+            <section ref={this.messagesEnd} id="section" className="h-40 container overflow-auto flex flex-col border-2 border-blue-300 mt-4 rounded-lg w-full relative mb-2">
             { outgoing &&
               <>
                   {/* <label className="leading-7 w-1/2 ml-auto text-sm text-gray-800">{ name } :</label> */}
                   { array.map( chat => { return chat } ) }
               </> 
             }
-             <div ref={this.messagesEnd} />
+             {/* <div ref={this.messagesEnd} /> */}
             </section>
 
             <div className="relative mb-4">
               <label className="leading-7 text-sm text-gray-600">Message</label>
-              <textarea autosize={{ minRows: 20, maxRows: 25 }} onKeyPress={(e)=> e.key ==='Enter' && this.sendHandler(e)} ref={this.textLog} id="message" name="msg" value={msg} onChange={this.changeHandler} placeholder="Write a message...." className="h-20 w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
+              <textarea autosize={{ minRows: 20, maxRows: 25 }} onKeyPress={(e)=> e.key ==='Enter' && this.sendHandler(e)} id="message" name="msg" value={msg} onChange={this.changeHandler} placeholder="Write a message...." className="h-20 w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
             </div>
             
             <button id="send" onClick={this.sendHandler} className="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Send</button>
