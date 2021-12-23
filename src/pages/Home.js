@@ -3,7 +3,8 @@ import { io } from 'socket.io-client';
 import env from "react-dotenv";
 const API_URL = env.API_URL;
 
-const socket = io(API_URL)
+// const socket = io(process.env.API_URL || API_URL)
+const socket = io('https://socketio-server-opdevelopers.herokuapp.com/')
 var array = [];
 
 // function messages() {
