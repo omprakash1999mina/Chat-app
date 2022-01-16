@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { io } from 'socket.io-client';
-import env from "react-dotenv";
-const API_URL = env.API_URL;
+const socket = io(process.env.REACT_APP_API_URL)
 
-// const socket = io(process.env.API_URL || API_URL)
-const socket = io('https://socketio-server-opdevelopers.herokuapp.com/')
+// const socket = io(API_URL || '')
 var array = [];
 
 // function messages() {
@@ -88,9 +86,9 @@ render() {
         <section className="text-gray-600 h-screen max-h-full body-font relative">
         <div className="absolute inset-0 bg-gray-300">
             <h1 className="text-center text-gray-900 pt-4 text-2xl font-semibold">Welcome to Developers-Org </h1>
-            <h2 className="text-center text-black">Here you can comunicate with developers and start developing something incredeble</h2>
+            <h2 className="text-center text-black">Here you can communicate with developers and start developing something incredible</h2>
         </div>
-        <div className="container px-5 pt-24 mx-auto flex  justify-center">
+        <div className="container px-5 pt-24 pb-28 mx-auto flex  justify-center">
           <div className="lg:w-5/6 md:w-1/2 bg-white rounded-lg p-8 flex flex-col justify-between w-full mt-10 md:mt-0 relative z-10 shadow-md">
             <div className="flex flex-row rounded-lg bg-gray-200  w-full ">
               <div className="flex flex-row justify-center">
@@ -130,13 +128,13 @@ render() {
                 <h2 className="text-gray-900 text-lg text-center mb-1 font-medium title-font">Developers-Org</h2>
                 <p className="leading-relaxed mb-5 text-gray-600">Please fill the details correctly and enjoy the conversation .</p>
                 <div className="relative mb-4">
-                    <label className="leading-7 text-sm text-gray-600">Name</label>
+                    <label className="leading-7 text-sm text-gray-600">Name *</label>
                     <input type="text" id="name" name="name" value={name} onChange={this.changeHandler} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
                 </div>
-                <div className="relative mb-4">
+                {/* <div className="relative mb-4">
                   <label className="leading-7 text-sm text-gray-600">Email</label>
                   <input type="email" id="email" name="email" className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
-                </div>
+                </div> */}
                 <div className="relative mb-4">
                   <label className="leading-7 text-sm text-gray-600">Room</label>
                   <input type="text" id="roomId" name="roomId" value={roomId} onChange={this.changeHandler} className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out" />
@@ -146,7 +144,7 @@ render() {
               </div>
             </div>
      
-        }
+      }
            
        </div>
     )
