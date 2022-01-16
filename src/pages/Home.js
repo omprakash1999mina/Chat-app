@@ -92,7 +92,7 @@ render() {
           <div className="lg:w-5/6 md:w-1/2 bg-white rounded-lg p-8 flex flex-col justify-between w-full mt-10 md:mt-0 relative z-10 shadow-md">
             <div className="flex flex-row rounded-lg bg-gray-200  w-full ">
               <div className="flex flex-row justify-center">
-                <img className="p-1 h-12 w-12" src="favicon4.ico" alt="logo" />
+                <img className="p-1 h-12 w-12" src="logo.ico" alt="logo" />
                 <div className="flex flex-col justify-center ">
                     <h2 className=" text-gray-900 text-lg font-medium title-font">oders-House</h2>
                 </div>
