@@ -1,7 +1,5 @@
-#  Project Ice
-This application 
-## Introduction
-In this project we are creating a ecommerce ice-cream parlour website with user login system .
+# Chat App
+This application is normal socketio demo project .
 
 ## Available Scripts
 
